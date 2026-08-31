@@ -1,4 +1,4 @@
-async function runBCT(){
+async function runBCGSM(){
 	
 	await waitFor(() => ServerSocket && ServerIsConnected);
 	
@@ -10,3 +10,5 @@ var bcModSdk=function(){"use strict";const o="1.2.0";function e(o){alert("Mod ER
 
     console.log("BCGagSoundMod loaded!");
 }
+
+runBCGSM()
