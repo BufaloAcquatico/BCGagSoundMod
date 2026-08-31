@@ -17,6 +17,6 @@
 (function() {
     'use strict';
     var script = document.createElement("script");
-    script.src = "https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/bcgsm.js";
+    script.src = "https://bufaloacquatico.github.io/BCGagSoundMod/bcgsm.js";
     document.head.appendChild(script);
 })();
