@@ -11,4 +11,16 @@ var bcModSdk=function(){"use strict";const o="1.2.0";function e(o){alert("Mod ER
     console.log("BCGagSoundMod loaded!");
 }
 
+ //do not touch this
+  async function waitFor(func, cancelFunc = () => false) {
+    while (!func()) {
+      if (cancelFunc()) return false;
+      await sleep(10);
+    }
+    return true;
+  }
+
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
 runBCGSM()
