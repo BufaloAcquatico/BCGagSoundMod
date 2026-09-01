@@ -93,9 +93,12 @@ function playSoundCategory(cat, vol = 0.8, useDefault = true) {
 window.ChatRoomRegisterMessageHandler({
     Priority: 600, Description: "BCGSM Gagtalk", Callback: (data, sender, msg, metadata) => {
       const match = /^(\D+)(\d+)$/.exec(data.Content);
+        console.log(match)
       if (sender.MemberNumber === Player.MemberNumber) switch (match?.[1]) {
         case "Talk": 
+                console.log("In Talk match");
               if(Player.isGagged()){
+                console.log("In isGagged");
                 playSoundEntry(getSoundsFolder()+"Moans/Moans (3).mp3");
               }
                 break;
