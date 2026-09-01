@@ -11,6 +11,19 @@ async function fetchAsset(url, init) {
     }
 }
 
+var CONFIG={};
+CONFIG.sounds = [];
+CONFIG.sounds["gagtalk"] = [
+    getSoundsFolder()+"Gagtalk/Gag talk (1).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (2).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (3).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (4).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (5).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (6).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (7).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (8).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (9).mp3"
+];
 
 
 async function runBCGSM(){
@@ -96,13 +109,10 @@ window.ChatRoomRegisterMessageHandler({
         console.log(match)
       if (sender.MemberNumber === Player.MemberNumber) switch (match?.[1]) {
         case "Chat": 
-                console.log("In Talk match");
               if(Player.IsGagged()){
-                console.log("In isGagged");
-                playSoundEntry(getSoundsFolder()+"Moans/Moans (3).mp3");
+                playSoundCategory("gagtalk");
               }
                 break;
-        case "OrgasmFailSurrender": StopLeaving("ruined orgasm"); break;
         default: // nothing to do here, but linters often insist every switch() has a default case
       }
     }
