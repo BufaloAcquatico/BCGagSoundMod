@@ -11,20 +11,6 @@ async function fetchAsset(url, init) {
     }
 }
 
-var CONFIG={};
-CONFIG.sounds = [];
-CONFIG.sounds["gagtalk"] = [
-    getSoundsFolder()+"Gagtalk/Gag talk (1).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (2).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (3).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (4).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (5).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (6).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (7).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (8).mp3",
-    getSoundsFolder()+"Gagtalk/Gag talk (9).mp3"
-];
-
 
 async function runBCGSM(){
 	
@@ -51,6 +37,22 @@ let _audioCtx = null;
 const MEDIA_FOLDER = "Media";
 const SOUNDS_FOLDER = "Sounds";
 const ROOT_URI = "https://bufaloacquatico.github.io/BCGagSoundMod/"
+
+var CONFIG={};
+CONFIG.sounds = [];
+CONFIG.sounds["gagtalk"] = [
+    getSoundsFolder()+"Gagtalk/Gag talk (1).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (2).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (3).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (4).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (5).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (6).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (7).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (8).mp3",
+    getSoundsFolder()+"Gagtalk/Gag talk (9).mp3"
+];
+
+
 
 function getSoundsFolder(){
     return ROOT_URI+MEDIA_FOLDER+"/"+SOUNDS_FOLDER+"/";
