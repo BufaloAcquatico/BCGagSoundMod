@@ -119,6 +119,17 @@ window.ChatRoomRegisterMessageHandler({
       }
     }
   });
+
+CommandCombine([
+{
+  Tag: 'test',
+  Description: ": My test command",
+
+  Action: () => {
+    console.log("Test function launched successfully");
+  }
+}])
+
 //do not touch this
 async function waitFor(func, cancelFunc = () => false) {
   while (!func()) {
