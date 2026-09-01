@@ -88,6 +88,22 @@ function playSoundCategory(cat, vol = 0.8, useDefault = true) {
     playSoundEntry(list[Math.floor(Math.random() * list.length)], vol);
     return true;
 }
+
+// register a message handler. If it is a message coming from us and we're currently gagged, play a sound from the gagtalk category
+window.ChatRoomRegisterMessageHandler({
+    Priority: 600, Description: "BCGSM Gagtalk", Callback: (data, sender, msg, metadata) => {
+      const match = /^(\D+)(\d+)$/.exec(data.Content);
+      if (sender.MemberNumber === Player.MemberNumber) switch (match?.[1]) {
+        case "Talk": 
+              if(Player.isGagged()){
+                playSoundEntry(getSoundsFolder()+"Moans/Moans (3).mp3");
+              }
+                break;
+        case "OrgasmFailSurrender": StopLeaving("ruined orgasm"); break;
+        default: // nothing to do here, but linters often insist every switch() has a default case
+      }
+    }
+  });
 //do not touch this
 async function waitFor(func, cancelFunc = () => false) {
   while (!func()) {
@@ -103,4 +119,4 @@ function sleep(ms) {
 
 
 runBCGSM()
-playSoundEntry(getSoundsFolder()+"Moans/Moans (3).mp3");
+
