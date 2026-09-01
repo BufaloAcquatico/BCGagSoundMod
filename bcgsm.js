@@ -1,4 +1,4 @@
-export async function fetchAsset(url, init) {
+async function fetchAsset(url, init) {
     try {
         const r = await fetch(url, init);
         if (r.ok) return r;
