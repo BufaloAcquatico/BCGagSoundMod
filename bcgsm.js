@@ -92,7 +92,7 @@ function playSoundCategory(cat, vol = 0.8, useDefault = true) {
 // register a message handler. If it is a message coming from us and we're currently gagged, play a sound from the gagtalk category
 window.ChatRoomRegisterMessageHandler({
     Priority: 600, Description: "BCGSM Gagtalk", Callback: (data, sender, msg, metadata) => {
-      const match = /^(\D+)(\d+)$/.exec(data.Content);
+      const match = /^(\D+)$/.exec(data.Content);
         console.log(match)
       if (sender.MemberNumber === Player.MemberNumber) switch (match?.[1]) {
         case "Talk": 
