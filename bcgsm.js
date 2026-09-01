@@ -25,7 +25,7 @@ var bcModSDK=function(){"use strict";const o="1.2.0";function e(o){alert("Mod ER
     const modApi = bcModSDK.registerMod({
       name: 'BCGSM',
       fullName: 'Bondage Club Gag Sound Mod',
-      version: 0.1,
+      version: "0.1",
       // Optional - Link to the source code of the mod
       repository: 'https://github.com/BufaloAcquatico/BCGagSoundMod',
     });
