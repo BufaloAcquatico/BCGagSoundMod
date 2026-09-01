@@ -102,4 +102,4 @@ function sleep(ms) {
 
 
 runBCGSM()
-playSoundEntry(getSoundsFolder+"Moans/Moans (3).mp3");
+playSoundEntry(getSoundsFolder()+"Moans/Moans (3).mp3");
