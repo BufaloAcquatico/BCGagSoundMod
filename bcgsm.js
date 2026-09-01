@@ -97,7 +97,7 @@ window.ChatRoomRegisterMessageHandler({
       if (sender.MemberNumber === Player.MemberNumber) switch (match?.[1]) {
         case "Chat": 
                 console.log("In Talk match");
-              if(Player.isGagged()){
+              if(Player.IsGagged()){
                 console.log("In isGagged");
                 playSoundEntry(getSoundsFolder()+"Moans/Moans (3).mp3");
               }
