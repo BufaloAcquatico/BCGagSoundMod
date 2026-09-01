@@ -37,9 +37,10 @@ const _soundBufferCache = new Map(); // url → AudioBuffer
 let _audioCtx = null;
 const MEDIA_FOLDER = "Media";
 const SOUNDS_FOLDER = "Sounds";
+const ROOT_URI = "https://bufaloacquatico.github.io/BCGagSoundMod/"
 
 function getSoundsFolder(){
-    return MEDIA_FOLDER+"/"+SOUNDS_FOLDER+"/";
+    return ROOT_URI+MEDIA_FOLDER+"/"+SOUNDS_FOLDER+"/";
 }
 
 
