@@ -1,4 +1,4 @@
-export async function fetchAsset(url, init) {
+async function fetchAsset(url, init) {
     try {
         const r = await fetch(url, init);
         if (r.ok) return r;
@@ -12,7 +12,7 @@ export async function fetchAsset(url, init) {
 }
 
 //do not touch this
-export async function waitFor(func, cancelFunc = () => false) {
+async function waitFor(func, cancelFunc = () => false) {
     while (!func()) {
         if (cancelFunc()) return false;
         await sleep(10);
@@ -20,11 +20,11 @@ export async function waitFor(func, cancelFunc = () => false) {
     return true;
 }
 
-export function sleep(ms) {
+function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
  
-export function resolveSoundBuffer(entry) {
+function resolveSoundBuffer(entry) {
     return new Promise((resolve) => {
         if (!entry) return resolve(null);
         if (_soundBufferCache.has(entry))
