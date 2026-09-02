@@ -114,7 +114,7 @@ window.ChatRoomRegisterMessageHandler({
             switch (match?.[1]) {
                 case "Chat":
                     if (!Player.IsGagged() || !(sender.MemberNumber === Player.MemberNumber)) return;
-                    if (data.content?.startsWith('(')) return;
+                    if (!data.content || data.content?.startsWith('(')) return;
                     else if (data.content.length < 5) {
                         playSoundCategory("gagtalk_short");
                     } else if (data.content.length < 20) {
