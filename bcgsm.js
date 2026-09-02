@@ -115,10 +115,10 @@ window.ChatRoomRegisterMessageHandler({
                 case "Chat":
                     console.log(data);
                     if (!Player.IsGagged() || !(sender.MemberNumber === Player.MemberNumber)) return;
-                    if (!data.content || data.content?.startsWith('(')) return;
-                    else if (data.content.length < 5) {
+                    if (!data.Content || data.Content?.startsWith('(')) return;
+                    else if (data.Content.length < 5) {
                         playSoundCategory("gagtalk_short");
-                    } else if (data.content.length < 20) {
+                    } else if (data.Content.length < 20) {
                         playSoundCategory("gagtalk_medium");
                     } else {
                         playSoundCategory("gagtalk_long");
