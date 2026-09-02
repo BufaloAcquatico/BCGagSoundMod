@@ -1,4 +1,4 @@
-async function fetchAsset(url, init) {
+export async function fetchAsset(url, init) {
     try {
         const r = await fetch(url, init);
         if (r.ok) return r;
@@ -12,7 +12,7 @@ async function fetchAsset(url, init) {
 }
 
 //do not touch this
-async function waitFor(func, cancelFunc = () => false) {
+export async function waitFor(func, cancelFunc = () => false) {
     while (!func()) {
         if (cancelFunc()) return false;
         await sleep(10);
@@ -20,6 +20,28 @@ async function waitFor(func, cancelFunc = () => false) {
     return true;
 }
 
-function sleep(ms) {
+export function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
+ 
+export function resolveSoundBuffer(entry) {
+    return new Promise((resolve) => {
+        if (!entry) return resolve(null);
+        if (_soundBufferCache.has(entry))
+            return resolve(_soundBufferCache.get(entry));
+        const ctx = _getAudioCtx();
+        const onAB = (ab) =>
+            ctx
+                .decodeAudioData(ab.slice(0))
+                .then((buf) => {
+                    _soundBufferCache.set(entry, buf);
+                    resolve(buf);
+                })
+                .catch(() => resolve(null));
+        fetchAsset(entry)
+            .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject()))
+            .then(onAB)
+            .catch(() => resolve(null));
+    });
+}
+
