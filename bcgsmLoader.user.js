@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BCGagSoundMod Loader
 // @namespace    https://www.bondageprojects.com/
-// @version      1
+// @version      2
 // @description  BC extension adding gag related sounds for a miscellanous of situations.
 // @author       BufaloAcquatico
 // @downloadURL  https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/bcgsmLoader.user.js
@@ -10,20 +10,9 @@
 // @match https://bondage-europe.com/*
 // @match https://www.bondage-europe.com/*
 // @match http://localhost:*/*
+// @require      https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/utils.js
+// @require      https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/bcModSdk.js
+// @require      https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/bcgsm.js
 // @run-at       document-end
 // @grant        none
 // ==/UserScript==
-
-(function() {
-
-    var script = document.createElement("script");
-    script.type = "module";
-    script.src = "https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/bcgsm.js";
-    document.head.appendChild(script);
-/*
-    'use strict';
-    var script = document.createElement("script");
-    script.src = "https://bufaloacquatico.github.io/BCGagSoundMod/bcgsm.js";
-    document.head.appendChild(script);
-*/
-})();
