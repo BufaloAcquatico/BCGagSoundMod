@@ -170,21 +170,14 @@ window.ChatRoomRegisterMessageHandler({
     },
 });
 
-/*
- *chat room message {
-  Sender: 53240,
-  Content: 'ActionUse',
-  Type: 'Action',
-  Dictionary: [
-    { SourceCharacter: 53240 },
-    { Tag: 'DestinationCharacter', MemberNumber: 53240, Text: 'Alex' },
-    { TargetCharacter: 53240 },
-    { Tag: 'NextAsset', AssetName: 'BallGag', GroupName: 'ItemMouth' },
-    { Tag: 'FocusAssetGroup', FocusGroupName: 'ItemMouth' },
-    { Tag: 'fbc_nonce', Text: 7 }
-  ]
-}
- */
+const listeners = [];
+function registerSocketListener(event, listener) {
+    if (!listeners.some((l) => l[1] === listener)) {
+        listeners.push([event, listener]);
+        ServerSocket.on(event, listener);
+    }
+}	
+
 CommandCombine([
     {
         Tag: "test",
