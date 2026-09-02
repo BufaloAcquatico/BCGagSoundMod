@@ -144,7 +144,6 @@ window.ChatRoomRegisterMessageHandler({
     Description: "BCGSM Gagtalk",
     Callback: (data, sender, msg, metadata) => {
         const match = /^(\D+)$/.exec(data.Type);
-        if ()
             switch (match?.[1]) {
                 case "Chat":
                     if (!Player.IsGagged() || sender.MemberNumber === Player.MemberNumber) return;
