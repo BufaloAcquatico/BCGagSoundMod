@@ -113,6 +113,7 @@ window.ChatRoomRegisterMessageHandler({
         const match = /^(\D+)$/.exec(data.Type);
             switch (match?.[1]) {
                 case "Chat":
+                    console.log(data);
                     if (!Player.IsGagged() || !(sender.MemberNumber === Player.MemberNumber)) return;
                     if (!data.content || data.content?.startsWith('(')) return;
                     else if (data.content.length < 5) {
