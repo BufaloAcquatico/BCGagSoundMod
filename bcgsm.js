@@ -158,6 +158,8 @@ window.ChatRoomRegisterMessageHandler({
                     }
                     break;
                 case "Action":
+                    console.log(currentlyGagged);
+                    console.log("Gagged now: " + Player.IsGagged());
                     // if before the action you weren't gagged and now you are, make a short gagging sound
                     if (!currentlyGagged && Player.IsGagged()) {
                         playSoundCategory("gagtalk_short");
