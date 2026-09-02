@@ -1,3 +1,6 @@
+const _soundBufferCache = new Map(); // url → AudioBuffer
+let _audioCtx = null;
+
 async function fetchAsset(url, init) {
     try {
         const r = await fetch(url, init);
@@ -24,6 +27,14 @@ function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
  
+function _getAudioCtx() {
+    if (!_audioCtx || _audioCtx.state === "closed") {
+        _audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (_audioCtx.state === "suspended") _audioCtx.resume();
+    return _audioCtx;
+}
+
 function resolveSoundBuffer(entry) {
     return new Promise((resolve) => {
         if (!entry) return resolve(null);
