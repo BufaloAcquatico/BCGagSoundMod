@@ -15,8 +15,15 @@
 // ==/UserScript==
 
 (function() {
+
+    var script = document.createElement("script");
+    script.type = "module";
+    script.src = "https://raw.githubusercontent.com/BufaloAcquatico/BCGagSoundMod/main/bcgsm.js";
+    document.head.appendChild(script);
+/*
     'use strict';
     var script = document.createElement("script");
     script.src = "https://bufaloacquatico.github.io/BCGagSoundMod/bcgsm.js";
     document.head.appendChild(script);
+*/
 })();
