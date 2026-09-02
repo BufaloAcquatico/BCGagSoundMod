@@ -113,7 +113,7 @@ window.ChatRoomRegisterMessageHandler({
         const match = /^(\D+)$/.exec(data.Type);
             switch (match?.[1]) {
                 case "Chat":
-                    if (!Player.IsGagged() || sender.MemberNumber === Player.MemberNumber) return;
+                    if (!Player.IsGagged() || !(sender.MemberNumber === Player.MemberNumber)) return;
                     if (data.content[0] == "(") return;
                     else if (data.content.length < 5) {
                         playSoundCategory("gagtalk_short");
