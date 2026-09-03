@@ -69,7 +69,9 @@ function getSoundsFolder() {
 }
 
 let _previewSrc = null;
-function playSoundEntry(entry, vol = 0.8, stopPrev = false) {
+function playSoundEntry(entry, stopPrev = true) {
+    if(!CONFIG.enabled)
+        return;
     resolveSoundBuffer(entry).then((buf) => {
         if (!buf) return;
         try {
@@ -83,7 +85,7 @@ function playSoundEntry(entry, vol = 0.8, stopPrev = false) {
             const src = ctx.createBufferSource();
             src.buffer = buf;
             const g = ctx.createGain();
-            g.gain.value = Math.min(Math.max(vol, 0), 1);
+            g.gain.value = Math.min(Math.max(CONFIG.volume, 0), 1);
             src.connect(g);
             g.connect(ctx.destination);
             src.start();
