@@ -157,9 +157,9 @@ CommandCombine([
         AutoComplete: (words) => {
             if (words.length < 1) {
                 window.ChatRoomSendLocal(
-                    "<style type='text/css'> .bcar_hint {display: flex; flex-flow: column wrap; overflow: auto; height: 5em; background: #000452; font-size: 1em; } .bcar_hint div {	margin:0 0.5ex; }</style><div class='bcar_hint'><div><b>" +
-                    subcommands.join("</b></div><div><b>") +
-                    "</b></div></div>",
+                    "<b>" +
+                    subcommands.join("</b>, <b>") +
+                    "</b>",
                     60000,
                 );
             }
@@ -174,9 +174,9 @@ CommandCombine([
                     if (common_prefix.length > words[0].length)
                         window.ElementValue("InputChat", "/bcar " + common_prefix);
                     window.ChatRoomSendLocal(
-                        "<style type='text/css'> .bcar_hint {display: flex; flex-flow: column wrap; overflow: auto; height: 5em; background: #000452; font-size: 1em; } .bcar_hint div {	margin:0 0.5ex; }</style><div class='bcar_hint'><div><b>" +
-                        matches.join("</b></div><div><b>") +
-                        "</b></div></div>",
+                        "<b>" +
+                        matches.join("</b>,<b>") +
+                        "</b>",
                         60000,
                     );
                 }
@@ -191,9 +191,47 @@ CommandCombine([
             }
         },
         Action: () => {
-            console.log("Test function launched successfully");
+            commandHandlerEnable(args.split(" "));
+            commandHandlerDisable(args.split(" "));
+            commandHandlerStatus(args.split(" "));
+            commandHandlerVolume(args.split(" "));
         },
     },
 ]);
 
+function commandHandlerEnable(args){
+    cmd = args[0];
+    if(cmd == "enable")
+        CONFIG.enabled = true;
+}
+
+function commandHandlerDisable(args){
+    cmd = args[0];
+    if(cmd == "disable")
+        CONFIG.enabled = false;
+}
+
+function commandHandlerStatus(args){
+    cmd = args[0];
+    if(cmd == "status")
+        if(CONFIG.enabled)
+            window.ChatRoomSendLocal("Gag sounds are <b> enabled </b>");
+        else
+            window.ChatRoomSendLocal("Gag sounds are <b> disabled </b>");
+}
+
+function commandHandlerVolume(args){
+    cmd = args[0];
+    if(cmd == "volume"){
+        if(args.length == 1)
+            window.ChatRoomSendLocal("Volume: <b> " + CONFIG.volume + " </b>");
+        else {
+            var volume = Number(args[1]);
+            if(volume >= 0 && volume <= 100)
+                CONFIG.volume = 100.0/volume;
+            else
+                window.ChatRoomSendLocal("Volume needs to be a number between 0 and 100");   
+        }
+    }
+}
 runBCGSM();
