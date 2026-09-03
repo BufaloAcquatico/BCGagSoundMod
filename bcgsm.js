@@ -190,7 +190,7 @@ CommandCombine([
                 }
             }
         },
-        Action: () => {
+        Action: (args) => {
             commandHandlerEnable(args.split(" "));
             commandHandlerDisable(args.split(" "));
             commandHandlerStatus(args.split(" "));
