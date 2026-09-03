@@ -185,10 +185,8 @@ CommandCombine([
                 for(let sub of subcommands_help)
                     help.push(sub.help_text);
                 window.ChatRoomSendLocal(
-                    "<b>" +
-                    help.join(",") +
-                    "</b>",
-                    CONFIG.commandsDelay,
+                    help.join(","),
+                    CONFIG.commandsDelay
                 );
             }
             if (words.length === 1) {
