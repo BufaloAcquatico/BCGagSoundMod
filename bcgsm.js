@@ -25,7 +25,7 @@ let currentlyGagged;
 var CONFIG = {};
 CONFIG.enabled = true;
 CONFIG.volume = 0.8;
-CONFIG.commandsDelay = 60000;
+CONFIG.commandsDelay = 30000;
 CONFIG.sounds = [];
 CONFIG.sounds["gagtalk_short"] = [
     getSoundsFolder() + "Gagtalk/Gag talk (1).mp3",
