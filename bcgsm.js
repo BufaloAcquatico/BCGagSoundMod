@@ -181,6 +181,9 @@ CommandCombine([
         Description: "gagsound help",
         AutoComplete: (words) => {
             if (words.length < 1) {
+                let help = [];
+                for(let sub of subcommands_help)
+                    help.push(sub.help_text);
                 window.ChatRoomSendLocal(
                     "<b>" +
                     subcommands.join("</b>, <b>") +
