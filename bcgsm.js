@@ -191,8 +191,12 @@ CommandCombine([
             }
             if (words.length === 1) {
                 const matches = [];
+                const matches_help = [];
                 for (let sub of subcommands_help) {
-                    if (sub.command.startsWith(words[0])) matches.push(sub.help_text);
+                    if (sub.command.startsWith(words[0])) {
+                        matches_help.push(sub.help_text);
+                        matches.push(sub.command);
+                    }
                 }
 
                 if (matches.length > 1) {
@@ -201,7 +205,7 @@ CommandCombine([
                         window.ElementValue("InputChat", "/gagsound " + common_prefix);
                     window.ChatRoomSendLocal(
                         "<b>" +
-                        matches.join("</b>,<b>") +
+                        matches_help.join("</b>,<b>") +
                         "</b>",
                         CONFIG.commandsDelay,
                     );
