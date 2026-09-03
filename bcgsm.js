@@ -50,41 +50,52 @@ CONFIG.volume = 0.8;
 CONFIG.commandsDelay = 30000;
 CONFIG.sounds = [];
 CONFIG.sounds["gagtalk_short"] = [
-    getSoundsFolder() + "Gagtalk/Gag talk (1).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (2).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (3).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (4).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (5).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (6).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (7).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (8).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (9).mp3",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Moan Short (7).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Moan Short (6).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Moan Short (9).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Moan Short (8).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Moan Short (4).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Moan Short (10).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Short/Gag talk short.ogg",
 ];
-
 CONFIG.sounds["gagtalk_medium"] = [
-    getSoundsFolder() + "Gagtalk/Gag talk (1).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (2).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (3).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (4).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (5).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (6).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (7).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (8).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (9).mp3",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Medium (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Medium (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Long.ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (5).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (4).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk.mp3",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk medium soft.mp3",
 ];
-
 CONFIG.sounds["gagtalk_long"] = [
-    getSoundsFolder() + "Gagtalk/Gag talk (1).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (2).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (3).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (4).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (5).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (6).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (7).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (8).mp3",
-    getSoundsFolder() + "Gagtalk/Gag talk (9).mp3",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Medium (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Medium (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Long.ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (5).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (4).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk.mp3",
+    getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk medium soft.mp3",
 ];
-
+CONFIG.sounds["get_gagged"] = [
+    getSoundsFolder() + "Media/Sounds/Gagging/Gagging (3).mp3",
+    getSoundsFolder() + "Media/Sounds/Gagging/Gagging (4).mp3",
+    getSoundsFolder() + "Media/Sounds/Gagging/Body binding (4).mp3",
+    getSoundsFolder() + "Media/Sounds/Gagging/Gag talk short soft.ogg",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (2).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (1).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Medium Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (3).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (4).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (2).mp3",
+];
 
 function getSoundsFolder() {
     return ROOT_URI + MEDIA_FOLDER + "/" + SOUNDS_FOLDER + "/";
@@ -157,7 +168,7 @@ window.ChatRoomRegisterMessageHandler({
                 console.log("Gagged now: " + Player.IsGagged());
                 // if before the action you weren't gagged and now you are, make a short gagging sound
                 if (!currentlyGagged && Player.IsGagged()) {
-                    playSoundCategory("gagtalk_short");
+                    playSoundCategory("get_gagged");
                 }
                 currentlyGagged = Player.IsGagged();
                 break;

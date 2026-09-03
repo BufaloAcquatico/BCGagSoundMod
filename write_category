@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 category folder"
+    exit 1
+fi
+
+echo "CONFIG.sounds[\"$1\"] = [" > $1.txt
+
+for folder in "${@:2}"; do
+    find "$folder" -type f | while read -r fname; do
+        echo "    getSoundsFolder() + \"${fname:2}\"," >> "$1.txt"
+    done
+done
+
+echo "];" >> $1.txt
