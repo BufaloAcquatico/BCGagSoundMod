@@ -20,20 +20,20 @@ const subcommands = ["enable", "disable", "status", "volume"];
 const subcommands_help = [
     {
         command:"enable",
-        help_text:"<b>/gagsound enable<b>: Enables all sound effects of the addon<br />"
+        help_text:"<b>/gagsound enable</b>: Enables all sound effects of the addon"
     },
     {
         command:"disable",
-        help_text:"<b>/gagsound disable<b>: Disables all sound effects of the addon<br />"
+        help_text:"<b>/gagsound disable</b>: Disables all sound effects of the addon"
     },
     {
         command:"status",
-        help_text:"<b>/gagsound status<b>: Displays if the addon is enabled<br />"
+        help_text:"<b>/gagsound status</b>: Displays if the addon is enabled"
     },
     {
         command:"volume",
-        help_text:"<b>/gagsound volume<b>: Displays the current volume<br />"+
-        "<b>/gagsound volume [0-100]<b>: Changes the volume from 0% to 100%<i> - Example: /gagsound volume 50</i>"
+        help_text:"<b>/gagsound volume</b>: Displays the current volume<br />"+
+        "<b>/gagsound volume [0-100]</b>: Changes the volume from 0% to 100%<i> - Example: /gagsound volume 50</i>"
     },
 
 
@@ -185,7 +185,7 @@ CommandCombine([
                 for(let sub of subcommands_help)
                     help.push(sub.help_text);
                 window.ChatRoomSendLocal(
-                    help.join(","),
+                    help.join(",<br />"),
                     CONFIG.commandsDelay
                 );
             }
