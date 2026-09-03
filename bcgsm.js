@@ -186,7 +186,7 @@ CommandCombine([
                     help.push(sub.help_text);
                 window.ChatRoomSendLocal(
                     "<b>" +
-                    help.join("</b>, <b>") +
+                    help.join(",") +
                     "</b>",
                     CONFIG.commandsDelay,
                 );
