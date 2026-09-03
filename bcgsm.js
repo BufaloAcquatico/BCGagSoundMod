@@ -23,6 +23,9 @@ const ROOT_URI = "https://bufaloacquatico.github.io/BCGagSoundMod/";
 let currentlyGagged;
 
 var CONFIG = {};
+CONFIG.enabled = true;
+CONFIG.volume = 0.8;
+CONFIG.commandsDelay = 60000;
 CONFIG.sounds = [];
 CONFIG.sounds["gagtalk_short"] = [
     getSoundsFolder() + "Gagtalk/Gag talk (1).mp3",
@@ -60,8 +63,6 @@ CONFIG.sounds["gagtalk_long"] = [
     getSoundsFolder() + "Gagtalk/Gag talk (9).mp3",
 ];
 
-CONFIG.enabled = true;
-CONFIG.volume = 0.8;
 
 function getSoundsFolder() {
     return ROOT_URI + MEDIA_FOLDER + "/" + SOUNDS_FOLDER + "/";
@@ -160,7 +161,7 @@ CommandCombine([
                     "<b>" +
                     subcommands.join("</b>, <b>") +
                     "</b>",
-                    60000,
+                    CONFIG.commandsDelay,
                 );
             }
             if (words.length === 1) {
@@ -177,7 +178,7 @@ CommandCombine([
                         "<b>" +
                         matches.join("</b>,<b>") +
                         "</b>",
-                        60000,
+                        CONFIG.commandsDelay,
                     );
                 }
 
@@ -201,36 +202,40 @@ CommandCombine([
 
 function commandHandlerEnable(args){
     cmd = args[0];
-    if(cmd == "enable")
+    if(cmd == "enable"){
         CONFIG.enabled = true;
+        window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>", CONFIG.commandsDelay);
+    }
 }
 
 function commandHandlerDisable(args){
     cmd = args[0];
-    if(cmd == "disable")
+    if(cmd == "disable"){
         CONFIG.enabled = false;
+        window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>", CONFIG.commandsDelay);
+    }
 }
 
 function commandHandlerStatus(args){
     cmd = args[0];
     if(cmd == "status")
         if(CONFIG.enabled)
-            window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>");
+            window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>", CONFIG.commandsDelay);
         else
-            window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>");
+            window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>", CONFIG.commandsDelay);
 }
 
 function commandHandlerVolume(args){
     cmd = args[0];
     if(cmd == "volume"){
         if(args.length == 1)
-            window.ChatRoomSendLocal("Volume: <b>" + Number(CONFIG.volume*100) + "</b>");
+            window.ChatRoomSendLocal("Volume: <b>" + Number(CONFIG.volume*100) + "</b>", CONFIG.commandsDelay);
         else {
             var volume = Number(args[1]);
             if(volume >= 0 && volume <= 100)
                 CONFIG.volume = 100.0/volume;
             else
-                window.ChatRoomSendLocal("Volume needs to be a number between 0 and 100");   
+                window.ChatRoomSendLocal("Volume needs to be a number between 0 and 100", CONFIG.commandsDelay);
         }
     }
 }
