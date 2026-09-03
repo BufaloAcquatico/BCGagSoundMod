@@ -98,7 +98,7 @@ CONFIG.sounds["get_gagged"] = [
 ];
 
 function getSoundsFolder() {
-    return ROOT_URI + MEDIA_FOLDER + "/" + SOUNDS_FOLDER + "/";
+    return ROOT_URI + "/";
 }
 
 let _previewSrc = null;

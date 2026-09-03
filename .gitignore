@@ -1,2 +1,6 @@
 
 requirements.txt
+gagtalk_long.txt
+gagtalk_medium.txt
+gagtalk_short.txt
+get_gagged.txt
