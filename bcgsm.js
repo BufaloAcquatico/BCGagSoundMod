@@ -16,7 +16,7 @@ async function runBCGSM() {
         () => (currentlyGagged = Player.IsGagged()),
     );
 }
-
+const subcommands = ["enable", "disable", "status", "volume"];
 const MEDIA_FOLDER = "Media";
 const SOUNDS_FOLDER = "Sounds";
 const ROOT_URI = "https://bufaloacquatico.github.io/BCGagSoundMod/";
@@ -67,7 +67,6 @@ function getSoundsFolder() {
     return ROOT_URI + MEDIA_FOLDER + "/" + SOUNDS_FOLDER + "/";
 }
 
-
 let _previewSrc = null;
 function playSoundEntry(entry, vol = 0.8, stopPrev = false) {
     resolveSoundBuffer(entry).then((buf) => {
@@ -111,31 +110,35 @@ window.ChatRoomRegisterMessageHandler({
     Description: "BCGSM Gagtalk",
     Callback: (data, sender, msg, metadata) => {
         const match = /^(\D+)$/.exec(data.Type);
-            switch (match?.[1]) {
-                case "Chat":
-                    console.log(data);
-                    if (!Player.IsGagged() || !(sender.MemberNumber === Player.MemberNumber)) return;
-                    if (!data.Content || data.Content?.startsWith('(')) return;
-                    else if (data.Content.length < 5) {
-                        playSoundCategory("gagtalk_short");
-                    } else if (data.Content.length < 20) {
-                        playSoundCategory("gagtalk_medium");
-                    } else {
-                        playSoundCategory("gagtalk_long");
-                    }
-                    break;
-                case "Action":
-                    console.log(currentlyGagged);
-                    console.log("Gagged now: " + Player.IsGagged());
-                    // if before the action you weren't gagged and now you are, make a short gagging sound
-                    if (!currentlyGagged && Player.IsGagged()) {
-                        playSoundCategory("gagtalk_short");
-                    }
-                    currentlyGagged = Player.IsGagged();
-                    break;
+        switch (match?.[1]) {
+            case "Chat":
+                console.log(data);
+                if (
+                    !Player.IsGagged() ||
+                    !(sender.MemberNumber === Player.MemberNumber)
+                )
+                    return;
+                if (!data.Content || data.Content?.startsWith("(")) return;
+                else if (data.Content.length < 5) {
+                    playSoundCategory("gagtalk_short");
+                } else if (data.Content.length < 20) {
+                    playSoundCategory("gagtalk_medium");
+                } else {
+                    playSoundCategory("gagtalk_long");
+                }
+                break;
+            case "Action":
+                console.log(currentlyGagged);
+                console.log("Gagged now: " + Player.IsGagged());
+                // if before the action you weren't gagged and now you are, make a short gagging sound
+                if (!currentlyGagged && Player.IsGagged()) {
+                    playSoundCategory("gagtalk_short");
+                }
+                currentlyGagged = Player.IsGagged();
+                break;
 
-                default:
-            }
+            default:
+        }
     },
 });
 
@@ -145,18 +148,52 @@ function registerSocketListener(event, listener) {
         listeners.push([event, listener]);
         ServerSocket.on(event, listener);
     }
-}	
+}
 
 CommandCombine([
     {
-        Tag: "test",
-        Description: ": My test command",
+        Tag: "gagsound",
+        Description: "gagsound help",
+        AutoComplete: (words) => {
+            if (words.length < 1) {
+                window.ChatRoomSendLocal(
+                    "<style type='text/css'> .bcar_hint {display: flex; flex-flow: column wrap; overflow: auto; height: 5em; background: #000452; font-size: 1em; } .bcar_hint div {	margin:0 0.5ex; }</style><div class='bcar_hint'><div><b>" +
+                    subcommands.join("</b></div><div><b>") +
+                    "</b></div></div>",
+                    60000,
+                );
+            }
+            if (words.length === 1) {
+                const matches = [];
+                for (let sub of subcommands) {
+                    if (sub.startsWith(words[0])) matches.push(sub);
+                }
 
+                if (matches.length > 1) {
+                    const common_prefix = prefix(matches);
+                    if (common_prefix.length > words[0].length)
+                        window.ElementValue("InputChat", "/bcar " + common_prefix);
+                    window.ChatRoomSendLocal(
+                        "<style type='text/css'> .bcar_hint {display: flex; flex-flow: column wrap; overflow: auto; height: 5em; background: #000452; font-size: 1em; } .bcar_hint div {	margin:0 0.5ex; }</style><div class='bcar_hint'><div><b>" +
+                        matches.join("</b></div><div><b>") +
+                        "</b></div></div>",
+                        60000,
+                    );
+                }
+
+                if (matches.length < 1) {
+                    /*No output, because no match*/
+                }
+
+                if (matches.length === 1) {
+                    window.ElementValue("InputChat", "/gagsound " + matches[0]);
+                }
+            }
+        },
         Action: () => {
             console.log("Test function launched successfully");
         },
     },
 ]);
-
 
 runBCGSM();
