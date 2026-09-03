@@ -215,16 +215,16 @@ function commandHandlerStatus(args){
     cmd = args[0];
     if(cmd == "status")
         if(CONFIG.enabled)
-            window.ChatRoomSendLocal("Gag sounds are <b> enabled </b>");
+            window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>");
         else
-            window.ChatRoomSendLocal("Gag sounds are <b> disabled </b>");
+            window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>");
 }
 
 function commandHandlerVolume(args){
     cmd = args[0];
     if(cmd == "volume"){
         if(args.length == 1)
-            window.ChatRoomSendLocal("Volume: <b> " + CONFIG.volume + " </b>");
+            window.ChatRoomSendLocal("Volume: <b>" + Number(CONFIG.volume*100) + "</b>");
         else {
             var volume = Number(args[1]);
             if(volume >= 0 && volume <= 100)
