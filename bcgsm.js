@@ -2,14 +2,14 @@ async function runBCGSM() {
     await waitFor(() => ServerSocket && ServerIsConnected);
     var bcModSDK = window.bcModSdk;
     const modApi = bcModSDK.registerMod({
-        name: "BCGSM",
-        fullName: "Bondage Club Gag Sound Mod",
+        name: "BCGS",
+        fullName: "Bondage Club Gag Sounds",
         version: "0.1",
         // Optional - Link to the source code of the mod
         repository: "https://github.com/BufaloAcquatico/BCGagSoundMod",
     });
 
-    console.log("BCGagSoundMod loaded!");
+    console.log("BCGagSound loaded!");
 
     registerSocketListener(
         "LoginResponse",
@@ -17,6 +17,28 @@ async function runBCGSM() {
     );
 }
 const subcommands = ["enable", "disable", "status", "volume"];
+const subcommands_help = [
+    {
+        command:"enable",
+        help_text:"<b>/gagsound enable<b>: Enables all sound effects of the addon<br />"
+    },
+    {
+        command:"disable",
+        help_text:"<b>/gagsound disable<b>: Disables all sound effects of the addon<br />"
+    },
+    {
+        command:"status",
+        help_text:"<b>/gagsound status<b>: Displays if the addon is enabled<br />"
+    },
+    {
+        command:"volume",
+        help_text:"<b>/gagsound volume<b>: Displays the current volume<br />"+
+        "<b>/gagsound volume [0-100]<b>: Changes the volume from 0% to 100%<i> - Example: /gagsound volume 50</i>"
+    },
+
+
+
+]
 const MEDIA_FOLDER = "Media";
 const SOUNDS_FOLDER = "Sounds";
 const ROOT_URI = "https://bufaloacquatico.github.io/BCGagSoundMod/";
@@ -110,7 +132,7 @@ function playSoundCategory(cat, vol = 0.8, useDefault = true) {
 // register a message handler. If it is a message coming from us and we're currently gagged, play a sound from the gagtalk category
 window.ChatRoomRegisterMessageHandler({
     Priority: 600,
-    Description: "BCGSM Gagtalk",
+    Description: "BCGS",
     Callback: (data, sender, msg, metadata) => {
         const match = /^(\D+)$/.exec(data.Type);
         switch (match?.[1]) {
@@ -168,14 +190,14 @@ CommandCombine([
             }
             if (words.length === 1) {
                 const matches = [];
-                for (let sub of subcommands) {
-                    if (sub.startsWith(words[0])) matches.push(sub);
+                for (let sub of subcommands_help) {
+                    if (sub.command.startsWith(words[0])) matches.push(sub.help_text);
                 }
 
                 if (matches.length > 1) {
                     const common_prefix = prefix(matches);
                     if (common_prefix.length > words[0].length)
-                        window.ElementValue("InputChat", "/bcar " + common_prefix);
+                        window.ElementValue("InputChat", "/gagsound " + common_prefix);
                     window.ChatRoomSendLocal(
                         "<b>" +
                         matches.join("</b>,<b>") +
