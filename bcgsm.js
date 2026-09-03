@@ -235,7 +235,7 @@ function commandHandlerVolume(args){
         else {
             var volume = Number(args[1]);
             if(volume >= 0 && volume <= 100)
-                CONFIG.volume = 100.0/volume;
+                CONFIG.volume = volume/100.0;
             else
                 window.ChatRoomSendLocal("Volume needs to be a number between 0 and 100", CONFIG.commandsDelay);
         }
