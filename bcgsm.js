@@ -250,8 +250,7 @@ window.ChatRoomRegisterMessageHandler({
                 } else if(data.Content.indexOf("Tickle") >= 0){
                     if (Player.IsGagged() && 
                     data.Dictionary && 
-                    data.Dictionary.TargetCharacter && 
-                    data.Dictionary.TargetCharacter === Player.MemberNumber )
+                    data.Dictionary.find((el) => el.TargetCharacter !== undefined)?.TargetCharacter === Player.MemberNumber )
                         playSoundCategory("giggle");
                 } else if(data.Content.indexOf("Whimper")>=0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
