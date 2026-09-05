@@ -249,10 +249,9 @@ window.ChatRoomRegisterMessageHandler({
                         playSoundCategory("struggle");
                 } else if(data.Content.indexOf("Tickle") >= 0){
                     if (Player.IsGagged() && 
-                    (sender.MemberNumber === Player.MemberNumber) && 
                     data.Dictionary && 
                     data.Dictionary.TargetCharacter && 
-                    data.Dictionary.TargetCharacter.MemberNumber === Player.MemberNumber )
+                    data.Dictionary.TargetCharacter === Player.MemberNumber )
                         playSoundCategory("giggle");
                 } else if(data.Content.indexOf("Whimper")>=0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
