@@ -244,10 +244,7 @@ window.ChatRoomRegisterMessageHandler({
                 break;
                 
             case "Activity":
-                if(data.Content.indexOf("MoanGag") >= 0){
-                    if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
-                        playSoundCategory("moan_generic");
-                } else if(data.Content.indexOf("Struggle") >= 0){
+                if(data.Content.indexOf("Struggle") >= 0){
                     if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
                         playSoundCategory("struggle");
                 } else if(data.Content.indexOf("Tickle") >= 0){
@@ -263,6 +260,9 @@ window.ChatRoomRegisterMessageHandler({
                 } else if(data.Content.indexOf("Orgasm")>= 0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
                         playSoundCategory("orgasm");
+                } else if(data.Content.indexOf("MoanGag") >= 0){
+                    if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
+                        playSoundCategory("moan_generic");
                 }
                 break;
             default:
