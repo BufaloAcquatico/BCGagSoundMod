@@ -97,6 +97,63 @@ CONFIG.sounds["get_gagged"] = [
     getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (2).mp3",
 ];
 
+CONFIG.sounds["giggle"] = [
+    getSoundsFolder() + "Media/Sounds/Giggle/haha (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/haha (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/haha (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/haha (4).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/haha (5).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (4).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (5).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (6).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/hehe (7).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/Tickling (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/Tickling (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Giggle/Tickling (3).ogg",
+];
+
+CONFIG.sounds["struggle"] = [
+    getSoundsFolder() + "Media/Sounds/Struggle/Struggle (2).mp3",
+    getSoundsFolder() + "Media/Sounds/Struggle/Struggle (3).mp3",
+];
+
+CONFIG.sounds["whimper"] = [
+    getSoundsFolder() + "Media/Sounds/Whimper/Whimper (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Whimper/Whimper (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Whimper/Whimper (4).ogg",
+    getSoundsFolder() + "Media/Sounds/Whimper/Whimper (6).ogg",
+    getSoundsFolder() + "Media/Sounds/Whimper/Whimper (5).ogg",
+    getSoundsFolder() + "Media/Sounds/Whimper/Whimper (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Whimper/Short soft Whimper.ogg",
+];
+
+CONFIG.sounds["moan_generic"] = [
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (2).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (1).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Medium Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (3).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (4).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (2).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Medium/Moans long soft (3).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Medium/Moans of pleasure (9).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Medium/Moans of pleasure (5).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Long/Moans long soft (5).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Long/Moans long soft (1).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Long/Penetration.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Long/Moans of pleasure (1).mp3",
+];
+
+CONFIG.sounds["orgasm"] = [
+    getSoundsFolder() + "Media/Sounds/Moans/Deep/Moans of pleasure (7).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Deep/Moans of pleasure (6).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Deep/Moans of pleasure (8).mp3",
+];
+
 function getSoundsFolder() {
     return ROOT_URI + "/";
 }
@@ -148,13 +205,22 @@ window.ChatRoomRegisterMessageHandler({
         const match = /^(\D+)$/.exec(data.Type);
         switch (match?.[1]) {
             case "Chat":
-                console.log(data);
                 if (
                     !Player.IsGagged() ||
                     !(sender.MemberNumber === Player.MemberNumber)
                 )
                     return;
                 if (!data.Content || data.Content?.startsWith("(")) return;
+                
+                var content = data.Content.toLowerCase();
+                if(content.indexOf("haha") >= 0 ||
+                    content.indexOf("hehe") >= 0 ||
+                    content.indexOf("hihi") >= 0 ||
+                    content.indexOf("ha ha") >= 0 ||
+                    content.indexOf("he he") >= 0 ||
+                    content.indexOf("hi hi") >= 0){
+                    playSoundCategory("giggle");
+                }
                 else if (data.Content.length < 5) {
                     playSoundCategory("gagtalk_short");
                 } else if (data.Content.length < 20) {
@@ -163,22 +229,49 @@ window.ChatRoomRegisterMessageHandler({
                     playSoundCategory("gagtalk_long");
                 }
                 break;
+                
             case "Action":
-                console.log(currentlyGagged);
-                console.log("Gagged now: " + Player.IsGagged());
                 // if before the action you weren't gagged and now you are, make a short gagging sound
                 if (!currentlyGagged && Player.IsGagged()) {
                     playSoundCategory("get_gagged");
                 }
                 currentlyGagged = Player.IsGagged();
-                break;
 
+                if (data.Content.indexOf("Struggle") >= 0) {
+                    if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
+                        playSoundCategory("struggle");
+                }
+                break;
+                
+            case "Activity":
+                if(data.Content.indexOf("MoanGag") >= 0){
+                    if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
+                        playSoundCategory("moan_generic");
+                } else if(data.Content.indexOf("Struggle") >= 0){
+                    if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
+                        playSoundCategory("struggle");
+                } else if(data.Content.indexOf("Tickle") >= 0){
+                    if (Player.IsGagged() && 
+                    (sender.MemberNumber === Player.MemberNumber) && 
+                    data.Dictionary && 
+                    data.Dictionary.TargetCharacter && 
+                    data.Dictionary.TargetCharacter.MemberNumber === Player.MemberNumber )
+                        playSoundCategory("giggle");
+                } else if(data.Content.indexOf("Whimper")>=0){
+                    if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
+                        playSoundCategory("whimper");
+                } else if(data.Content.indexOf("Orgasm")>= 0){
+                    if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
+                        playSoundCategory("orgasm");
+                }
+                break;
             default:
         }
     },
 });
 
 const listeners = [];
+
 function registerSocketListener(event, listener) {
     if (!listeners.some((l) => l[1] === listener)) {
         listeners.push([event, listener]);
@@ -189,7 +282,7 @@ function registerSocketListener(event, listener) {
 CommandCombine([
     {
         Tag: "gagsound",
-        Description: "gagsound help",
+        Description: "Gagsound help",
         AutoComplete: (words) => {
             if (words.length < 1) {
                 let help = [];
