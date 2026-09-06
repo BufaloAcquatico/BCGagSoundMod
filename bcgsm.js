@@ -262,7 +262,7 @@ window.ChatRoomRegisterMessageHandler({
                 } else if(data.Content.indexOf("Orgasm")>= 0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
                         playSoundCategory("orgasm");
-                } else if(data.Content.endsWith("MoanGag") >= 0){
+                } else if(data.Content.endsWith("MoanGag") ){
                     if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
                         playSoundCategory("moan_generic");
                 }
