@@ -252,13 +252,17 @@ window.ChatRoomRegisterMessageHandler({
                     data.Dictionary && 
                     data.Dictionary.find((el) => el.TargetCharacter !== undefined)?.TargetCharacter === Player.MemberNumber )
                         playSoundCategory("giggle");
-                } else if(data.Content.indexOf("Whimper")>=0){
+                } else if (data.Content.indexOf("Giggle") >= 0){                    
+                    if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
+                        playSoundCategory("giggle");
+                }
+                else if(data.Content.indexOf("Whimper")>=0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
                         playSoundCategory("whimper");
                 } else if(data.Content.indexOf("Orgasm")>= 0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
                         playSoundCategory("orgasm");
-                } else if(data.Content.indexOf("MoanGag") >= 0){
+                } else if(data.Content.endsWith("MoanGag") >= 0){
                     if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
                         playSoundCategory("moan_generic");
                 }
