@@ -155,33 +155,33 @@ CONFIG.sounds["orgasm"] = [
 ];
 
 CONFIG.sounds["moan_short"] = [
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Gagging (2).mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Gagging (1).mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Moan Short Soft 1.mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Moan Short Soft.mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Moan Medium Soft 1.mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Moans of pleasure (3).mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Moans of pleasure (4).mp3",
-    getSoundsFolder() + "dia/Sounds/Moans/Short/Moans of pleasure (2).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (2).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (1).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Medium Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (3).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (4).mp3",
+    getSoundsFolder() + "Media/Sounds/Moans/Short/Moans of pleasure (2).mp3",
 ];
 CONFIG.sounds["mumble_short"] = [
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (8).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (5).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (2).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (6).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (10).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft.mp3",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft 1.mp3",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft (2).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft (3).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Short/Moan Short (8).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Short/Moan Short (5).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Short/Moan Short (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Short/Moan Short (6).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Short/Moan Short (10).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Short/Moan Short Soft.mp3",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Short/Moan Short Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Short/Moan Short Soft (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Short/Moan Short Soft (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Short/Moan Short Soft (1).ogg",
 ];
 CONFIG.sounds["mumble_medium"] = [
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Medium/Moan Medium (3).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Medium/Moan Medium (2).ogg",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Medium/Moan Medium Soft 1.mp3",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Medium/Moans long soft (3).mp3",
-    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Medium/Moan Medium Soft (1).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Medium/Moan Medium (3).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Neutral/Medium/Moan Medium (2).ogg",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Medium/Moan Medium Soft 1.mp3",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Medium/Moans long soft (3).mp3",
+    getSoundsFolder() + "Media/Sounds/Mumble/Soft/Medium/Moan Medium Soft (1).ogg",
 ];
 
 function getSoundsFolder() {
