@@ -15,6 +15,8 @@ async function runBCGSM() {
         "LoginResponse",
         () => (currentlyGagged = Player.IsGagged()),
     );
+
+    prepareSettings();
 }
 const subcommands = ["enable", "disable", "status", "volume"];
 const subcommands_help = [
@@ -35,8 +37,6 @@ const subcommands_help = [
         help_text:"<b>/gagsound volume</b>: Displays the current volume<br />"+
         "<b>/gagsound volume [0-100]</b>: Changes the volume from 0% to 100%<i> - Example: /gagsound volume 50</i>"
     },
-
-
 
 ]
 const MEDIA_FOLDER = "Media";
@@ -436,6 +436,8 @@ function commandHandlerVolume(args){
         }
     }
 }
-
-Player.BCGS = CONFIG;
+async function prepareSettings(){
+    await waitFor(() => !!Player?.AccountName)
+        Player.BCGS = CONFIG;
+}
 runBCGSM();
