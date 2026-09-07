@@ -337,6 +337,12 @@ function registerSocketListener(event, listener) {
     }
 }
 
+function bcgsSettingsSave() {
+    Player.ExtensionSettings.BCGS = Player.BCGS;
+    ServerPlayerExtensionSettingsSync("BCGS");
+}
+
+
 CommandCombine([
     {
         Tag: "gagsound",
@@ -430,4 +436,6 @@ function commandHandlerVolume(args){
         }
     }
 }
+
+Player.BCGS = CONFIG;
 runBCGSM();
