@@ -340,6 +340,8 @@ function registerSocketListener(event, listener) {
 function bcgsSettingsSave() {
     Player.ExtensionSettings.BCGS = Player.BCGS;
     ServerPlayerExtensionSettingsSync("BCGS");
+    console.log("Settings saved:");
+    console.log(Player.ExtensionSettings.BCGS);
 }
 
 
