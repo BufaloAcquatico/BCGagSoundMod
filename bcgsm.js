@@ -438,10 +438,12 @@ function commandHandlerVolume(args){
     }
     
 }
+
 async function prepareSettings(){
-    await waitFor(() => !!Player?.AccountName){
-        Player.BCGS = Player.ExtensionSettings.BCGS || DEFAULT_CONFIG;
-        Player.BCGS.sounds = DEFAULT_CONFIG.sounds;
-    }
+    await waitFor(() => !!Player?.AccountName)
+    Player.BCGS = Player.ExtensionSettings.BCGS || DEFAULT_CONFIG;
+    Player.BCGS.sounds = DEFAULT_CONFIG.sounds;
+       
 }
+
 runBCGSM();
