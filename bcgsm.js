@@ -403,39 +403,40 @@ CommandCombine([
 function commandHandlerEnable(args){
     cmd = args[0];
     if(cmd == "enable"){
-        DEFAULT_CONFIG.enabled = true;
-        window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>", DEFAULT_CONFIG.commandsDelay);
+        Player.BCGS.enabled = true;
+        window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>", Player.BCGS.commandsDelay);
     }
 }
 
 function commandHandlerDisable(args){
     cmd = args[0];
     if(cmd == "disable"){
-        DEFAULT_CONFIG.enabled = false;
-        window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>", DEFAULT_CONFIG.commandsDelay);
+        Player.BCGS.enabled = false;
+        window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>", Player.BCGS.commandsDelay);
     }
 }
 
 function commandHandlerStatus(args){
     cmd = args[0];
     if(cmd == "status")
-        if(DEFAULT_CONFIG.enabled)
-            window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>", DEFAULT_CONFIG.commandsDelay);
+        if(Player.BCGS.enabled)
+            window.ChatRoomSendLocal("Gag sounds are <b>enabled</b>", Player.BCGS.commandsDelay);
         else
-            window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>", DEFAULT_CONFIG.commandsDelay);
+            window.ChatRoomSendLocal("Gag sounds are <b>disabled</b>", Player.BCGS.commandsDelay);
+
 }
 
 function commandHandlerVolume(args){
     cmd = args[0];
     if(cmd == "volume"){
         if(args.length == 1)
-            window.ChatRoomSendLocal("Volume: <b>" + Number(DEFAULT_CONFIG.volume*100) + "</b>", DEFAULT_CONFIG.commandsDelay);
+            window.ChatRoomSendLocal("Volume: <b>" + Number(Player.BCGS.volume*100) + "</b>", Player.BCGS.commandsDelay);
         else {
             var volume = Number(args[1]);
             if(volume >= 0 && volume <= 100)
-                DEFAULT_CONFIG.volume = volume/100.0;
+                Player.BCGS.volume = volume/100.0;
             else
-                window.ChatRoomSendLocal("Volume needs to be a number between 0 and 100", DEFAULT_CONFIG.commandsDelay);
+                window.ChatRoomSendLocal("Volume needs to be a number between 0 and 100", Player.BCGS.commandsDelay);
         }
     }
     
