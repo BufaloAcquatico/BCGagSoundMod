@@ -154,6 +154,36 @@ CONFIG.sounds["orgasm"] = [
     getSoundsFolder() + "Media/Sounds/Moans/Deep/Moans of pleasure (8).mp3",
 ];
 
+CONFIG.sounds["moan_short"] = [
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Gagging (2).mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Gagging (1).mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Moan Short Soft 1.mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Moan Short Soft.mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Moan Medium Soft 1.mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Moans of pleasure (3).mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Moans of pleasure (4).mp3",
+    getSoundsFolder() + "dia/Sounds/Moans/Short/Moans of pleasure (2).mp3",
+];
+CONFIG.sounds["mumble_short"] = [
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (8).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (5).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (2).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (6).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Short/Moan Short (10).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft.mp3",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft 1.mp3",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft (2).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft (3).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Short/Moan Short Soft (1).ogg",
+];
+CONFIG.sounds["mumble_medium"] = [
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Medium/Moan Medium (3).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Neutral/Medium/Moan Medium (2).ogg",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Medium/Moan Medium Soft 1.mp3",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Medium/Moans long soft (3).mp3",
+    getSoundsFolder() + "dia/Sounds/Mumble/Soft/Medium/Moan Medium Soft (1).ogg",
+];
+
 function getSoundsFolder() {
     return ROOT_URI + "/";
 }
@@ -221,6 +251,16 @@ window.ChatRoomRegisterMessageHandler({
                     content.indexOf("hi hi") >= 0){
                     playSoundCategory("giggle");
                 }
+                if(content.indexOf("mh~") == 0) {
+                    playSoundCategory("moan_short");
+                } else if(content.indexOf("mh") == 0){
+                    playSoundCategory("mumble_short");
+                } else if(content.indexOf("mmm") >= 0){
+                    if(content.endsWith("~"))
+                            playSoundCategory("moan_generic");
+                    else
+                        playSoundCategory("mumble_medium");
+                }
                 else if (data.Content.length < 5) {
                     playSoundCategory("gagtalk_short");
                 } else if (data.Content.length < 20) {
@@ -262,6 +302,22 @@ window.ChatRoomRegisterMessageHandler({
                 } else if(data.Content.indexOf("Orgasm")>= 0){
                     if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
                         playSoundCategory("orgasm");
+                } else if(data.Content.endsWith("Caress")){
+                    if (Player.IsGagged() && 
+                        data.Dictionary && 
+                        data.Dictionary.find((el) => el.TargetCharacter !== undefined)?.TargetCharacter === Player.MemberNumber ){
+                        let group = data.Dictionary.Tag.FocusGroupName;
+                        if(group == "ItemVulva" || group == "ItemBreast")
+                            playSoundCategory("moan_generic");
+                        
+                        if(group == "ItemMouth" || group == "ItemHead")
+                            playSoundCategory("moan_short");
+                    }
+                }
+                else if(data.Content.indexOf("MoanGagTalk")>= 0){
+                    if (Player.IsGagged() && sender.MemberNumber === Player.MemberNumber )
+                        playSoundCategory("mumble_medium");
+                                                       
                 } else if(data.Content.endsWith("MoanGag") ){
                     if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
                         playSoundCategory("moan_generic");
