@@ -306,7 +306,7 @@ window.ChatRoomRegisterMessageHandler({
                     if (Player.IsGagged() && 
                         data.Dictionary && 
                         data.Dictionary.find((el) => el.TargetCharacter !== undefined)?.TargetCharacter === Player.MemberNumber ){
-                        let group = data.Dictionary.Tag.FocusGroupName;
+                        let group = data.Dictionary.find((el) => el.FocusGroupName !== undefined)?.FocusGroupName;
                         if(group == "ItemVulva" || group == "ItemBreast")
                             playSoundCategory("moan_generic");
                         
