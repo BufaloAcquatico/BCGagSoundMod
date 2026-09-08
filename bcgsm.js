@@ -184,6 +184,21 @@ DEFAULT_CONFIG.sounds["mumble_medium"] = [
     getSoundsFolder() + "Media/Sounds/Mumble/Soft/Medium/Moan Medium Soft (1).ogg",
 ];
 
+DEFAULT_CONFIG.category_probability = {
+    gagtalk_short: 0.50,
+    gagtalk_medium: 0.50,
+    gagtalk_long: 0.50,
+    get_gagged: 1,
+    giggle: 0.50,
+    struggle: 0.80,
+    whimper: 1,
+    moan_short: 0.50,
+    moan_generic: 0.50,
+    orgasm: 1,
+    mumble_short: 0.50,
+    mumble_medium: 0.50
+}
+
 function getSoundsFolder() {
     return ROOT_URI + "/";
 }
@@ -223,7 +238,8 @@ function playSoundCategory(cat, vol = 0.8, useDefault = true) {
     let list = ((DEFAULT_CONFIG.sounds && DEFAULT_CONFIG.sounds[cat]) || []).filter(Boolean);
     if (list.length === 0 && useDefault) list = SOUND_DEFAULTS[cat] || [];
     if (list.length === 0) return false;
-    playSoundEntry(list[Math.floor(Math.random() * list.length)], vol);
+    if(Math.random() < Player.BCGS.category_probability[cat])
+        playSoundEntry(list[Math.floor(Math.random() * list.length)], vol);
     return true;
 }
 
@@ -462,7 +478,11 @@ async function prepareSettings(){
     await waitFor(() => !!Player?.AccountName)
     Player.BCGS = Player.ExtensionSettings.BCGS || DEFAULT_CONFIG;
     Player.BCGS.sounds = DEFAULT_CONFIG.sounds;
-       
+    Player.BCGS.enabled = Player.BCGS.enabled ? Player.BCGS.enabled : DEFAULT_CONFIG.enabled;
+    Player.BCGS.volume = Player.BCGS.volume ? Player.BCGS.volume : DEFAULT_CONFIG.volume;
+    Player.BCGS.commandsDelay = Player.BCGS.commandsDelay ? Player.BCGS.commandsDelay : DEFAULT_CONFIG.commandsDelay;
+    Player.BCGS.category_probability = Player.BCGS.category_probability ? Player.BCGS.category_probability : DEFAULT_CONFIG.category_probability;
+    
 }
 
 runBCGSM();
