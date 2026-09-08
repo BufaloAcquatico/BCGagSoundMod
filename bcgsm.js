@@ -487,7 +487,7 @@ function commandHandlerCategories(args){
         }
         window.ChatRoomSendLocal(
             "<b>" +
-            categories.join("</b>,<b><br .>") +
+            categories.join("<br />") +
             "</b>",
             Player.BCGS.commandsDelay,
         );
