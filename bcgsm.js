@@ -190,7 +190,7 @@ function getSoundsFolder() {
 
 let _previewSrc = null;
 function playSoundEntry(entry, stopPrev = true) {
-    if(!DEFAULT_CONFIG.enabled)
+    if(!Player.BCGS.enabled)
         return;
     resolveSoundBuffer(entry).then((buf) => {
         if (!buf) return;
@@ -205,7 +205,7 @@ function playSoundEntry(entry, stopPrev = true) {
             const src = ctx.createBufferSource();
             src.buffer = buf;
             const g = ctx.createGain();
-            g.gain.value = Math.min(Math.max(DEFAULT_CONFIG.volume, 0), 1);
+            g.gain.value = Math.min(Math.max(Player.BCGS.volume, 0), 1);
             src.connect(g);
             g.connect(ctx.destination);
             src.start();
@@ -340,8 +340,6 @@ function registerSocketListener(event, listener) {
 function bcgsSettingsSave() {
     Player.ExtensionSettings.BCGS = Player.BCGS;
     ServerPlayerExtensionSettingsSync("BCGS");
-    console.log("Settings saved:");
-    console.log(Player.ExtensionSettings.BCGS);
 }
 
 
@@ -413,6 +411,8 @@ function commandHandlerHelp(args){
                 Player.BCGS.commandsDelay,
             );
         }
+    } else {
+        console.log(args);
     }
 }
 
