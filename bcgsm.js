@@ -356,7 +356,7 @@ CommandCombine([
                     help.push(sub.help_text);
                 window.ChatRoomSendLocal(
                     help.join(",<br />"),
-                    DEFAULT_CONFIG.commandsDelay
+                    Player.BCGS.commandsDelay
                 );
             }
             if (words.length === 1) {
@@ -377,7 +377,7 @@ CommandCombine([
                         "<b>" +
                         matches_help.join("</b>,<b>") +
                         "</b>",
-                        DEFAULT_CONFIG.commandsDelay,
+                        Player.BCGS.commandsDelay,
                     );
                 }
 
@@ -391,6 +391,7 @@ CommandCombine([
             }
         },
         Action: (args) => {
+            commandHandlerHelp(args.split(" "));
             commandHandlerEnable(args.split(" "));
             commandHandlerDisable(args.split(" "));
             commandHandlerStatus(args.split(" "));
@@ -399,6 +400,21 @@ CommandCombine([
         },
     },
 ]);
+
+function commandHandlerHelp(args){
+    if(args.length == 0){
+        for (let sub of subcommands_help) {
+            matches_help.push(sub.help_text);
+
+            window.ChatRoomSendLocal(
+                "<b>" +
+                matches_help.join("</b>,<b>") +
+                "</b>",
+                Player.BCGS.commandsDelay,
+            );
+        }
+    }
+}
 
 function commandHandlerEnable(args){
     cmd = args[0];
