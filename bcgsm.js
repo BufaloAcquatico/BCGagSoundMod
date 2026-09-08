@@ -39,7 +39,7 @@ const subcommands_help = [
     },
     {
         command:"categories",
-        help_test:"<b>/gagsound categories</b>: Prints the sound categories used by the mod";
+        help_test:"<b>/gagsound categories</b>: Prints the sound categories used by the mod"
     }
 
 ]
