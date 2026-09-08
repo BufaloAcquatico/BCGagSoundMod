@@ -37,6 +37,10 @@ const subcommands_help = [
         help_text:"<b>/gagsound volume</b>: Displays the current volume<br />"+
         "<b>/gagsound volume [0-100]</b>: Changes the volume from 0% to 100%<i> - Example: /gagsound volume 50</i>"
     },
+    {
+        command:"categories",
+        help_test:"<b>/gagsound categories</b>: Prints the sound categories used by the mod";
+    }
 
 ]
 const MEDIA_FOLDER = "Media";
@@ -70,6 +74,7 @@ DEFAULT_CONFIG.sounds["gagtalk_medium"] = [
     getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk.mp3",
     getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk medium soft.mp3",
 ];
+/*
 DEFAULT_CONFIG.sounds["gagtalk_long"] = [
     getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Medium (3).ogg",
     getSoundsFolder() + "Media/Sounds/Generic/Medium/Moan Medium (2).ogg",
@@ -82,6 +87,7 @@ DEFAULT_CONFIG.sounds["gagtalk_long"] = [
     getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk.mp3",
     getSoundsFolder() + "Media/Sounds/Generic/Medium/Gag talk medium soft.mp3",
 ];
+*/
 DEFAULT_CONFIG.sounds["get_gagged"] = [
     getSoundsFolder() + "Media/Sounds/Gagging/Gagging (3).mp3",
     getSoundsFolder() + "Media/Sounds/Gagging/Gagging (4).mp3",
@@ -130,7 +136,7 @@ DEFAULT_CONFIG.sounds["whimper"] = [
     getSoundsFolder() + "Media/Sounds/Whimper/Short soft Whimper.ogg",
 ];
 
-DEFAULT_CONFIG.sounds["moan_generic"] = [
+DEFAULT_CONFIG.sounds["moan_medium"] = [
     getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (2).mp3",
     getSoundsFolder() + "Media/Sounds/Moans/Short/Gagging (1).mp3",
     getSoundsFolder() + "Media/Sounds/Moans/Short/Moan Short Soft 1.mp3",
@@ -187,13 +193,12 @@ DEFAULT_CONFIG.sounds["mumble_medium"] = [
 DEFAULT_CONFIG.category_probability = {
     gagtalk_short: 0.50,
     gagtalk_medium: 0.50,
-    gagtalk_long: 0.50,
     get_gagged: 1,
     giggle: 0.50,
     struggle: 0.80,
     whimper: 1,
     moan_short: 0.50,
-    moan_generic: 0.50,
+    moan_medium: 0.50,
     orgasm: 1,
     mumble_short: 0.50,
     mumble_medium: 0.50
@@ -273,16 +278,14 @@ window.ChatRoomRegisterMessageHandler({
                     playSoundCategory("mumble_short");
                 } else if(content.indexOf("mmm") >= 0){
                     if(content.endsWith("~"))
-                            playSoundCategory("moan_generic");
+                            playSoundCategory("moan_medium");
                     else
                         playSoundCategory("mumble_medium");
                 }
                 else if (data.Content.length < 5) {
                     playSoundCategory("gagtalk_short");
-                } else if (data.Content.length < 20) {
-                    playSoundCategory("gagtalk_medium");
                 } else {
-                    playSoundCategory("gagtalk_long");
+                    playSoundCategory("gagtalk_medium");
                 }
                 break;
                 
@@ -324,7 +327,7 @@ window.ChatRoomRegisterMessageHandler({
                         data.Dictionary.find((el) => el.TargetCharacter !== undefined)?.TargetCharacter === Player.MemberNumber ){
                         let group = data.Dictionary.find((el) => el.FocusGroupName !== undefined)?.FocusGroupName;
                         if(group == "ItemVulva" || group == "ItemBreast")
-                            playSoundCategory("moan_generic");
+                            playSoundCategory("moan_medium");
                         
                         if(group == "ItemMouth" || group == "ItemHead")
                             playSoundCategory("moan_short");
@@ -336,7 +339,7 @@ window.ChatRoomRegisterMessageHandler({
                                                        
                 } else if(data.Content.endsWith("MoanGag") ){
                     if (Player.IsGagged() && (sender.MemberNumber === Player.MemberNumber) )
-                        playSoundCategory("moan_generic");
+                        playSoundCategory("moan_medium");
                 }
                 break;
             default:
@@ -410,6 +413,7 @@ CommandCombine([
             commandHandlerDisable(args.split(" "));
             commandHandlerStatus(args.split(" "));
             commandHandlerVolume(args.split(" "));
+            commandHandlerCategories(args.split(" "));
             bcgsSettingsSave();
         },
     },
@@ -472,6 +476,23 @@ function commandHandlerVolume(args){
         }
     }
     
+}
+
+function commandHandlerCategories(args){
+    cmd = args[0];
+    if(cmd == "categories"){
+        let categories = []
+        for(key in Player.BCGS.category_probability){
+            categories.push(key);
+        }
+        window.ChatRoomSendLocal(
+            "<b>" +
+            matches_help.join("</b>,<b>") +
+            "</b>",
+            Player.BCGS.commandsDelay,
+        );
+        
+    }
 }
 
 async function prepareSettings(){
