@@ -18,7 +18,7 @@ async function runBCGSM() {
 
     prepareSettings();
 }
-const subcommands = ["enable", "disable", "status", "volume"];
+const subcommands = ["enable", "disable", "status", "volume", "categories"];
 const subcommands_help = [
     {
         command:"enable",
@@ -487,7 +487,7 @@ function commandHandlerCategories(args){
         }
         window.ChatRoomSendLocal(
             "<b>" +
-            matches_help.join("</b>,<b>") +
+            categories.join("</b>,<b>") +
             "</b>",
             Player.BCGS.commandsDelay,
         );
