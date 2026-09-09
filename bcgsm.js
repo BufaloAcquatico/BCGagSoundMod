@@ -435,8 +435,8 @@ function commandHandlerHelp(args){
             matches_help.push(sub.help_text);
 
             window.ChatRoomSendLocal(
-                matches_help.join(",<br />") +
-                Player.BCGS.commandsDelay,
+                matches_help.join(",<br />"),
+                Player.BCGS.commandsDelay
             );
         }
     } else {
