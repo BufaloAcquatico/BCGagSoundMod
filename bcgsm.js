@@ -435,9 +435,7 @@ function commandHandlerHelp(args){
             matches_help.push(sub.help_text);
 
             window.ChatRoomSendLocal(
-                "<b>" +
                 matches_help.join("</b>,<b>") +
-                "</b>",
                 Player.BCGS.commandsDelay,
             );
         }
@@ -508,7 +506,7 @@ function commandHandlerProbabilities(args){
     let categories = getCategories();
     if(categories.includes(cmd)){
         if(args.length == 1)
-            window.ChatRoomSendLocal("<b>" + category + "</b>: " + Player.BCGS.category_probability[category]);
+            window.ChatRoomSendLocal("<b>" + category + "</b>: " + parseInt(Player.BCGS.category_probability[category] * 100) + "%");
         else {
             probability = parseInt(args[1]);
             
