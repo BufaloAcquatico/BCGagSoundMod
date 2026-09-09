@@ -375,6 +375,7 @@ CommandCombine([
         Tag: "gagsound",
         Description: "Gagsound help",
         AutoComplete: (words) => {
+            var autocomplete_words = subcommands_help.concat(getCategories());
             if (words.length < 1) {
                 let help = [];
                 for(let sub of subcommands_help)
@@ -393,6 +394,10 @@ CommandCombine([
                         matches.push(sub.command);
                     }
                 }
+
+                for( let cat of getCategories())
+                    if(cat.startsWith(words[0]))
+                        matches.push(cat);
 
                 if (matches.length > 1) {
                     const common_prefix = prefix(matches);
