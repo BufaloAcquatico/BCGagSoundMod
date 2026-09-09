@@ -403,12 +403,21 @@ CommandCombine([
                     const common_prefix = prefix(matches);
                     if (common_prefix.length > words[0].length)
                         window.ElementValue("InputChat", "/gagsound " + common_prefix);
-                    window.ChatRoomSendLocal(
-                        "<b>" +
-                        matches_help.join("</b>,<b>") +
-                        "</b>",
-                        Player.BCGS.commandsDelay,
-                    );
+                    if(matches_help.length > 0)
+                        window.ChatRoomSendLocal(
+                            "<b>" +
+                            matches_help.join("</b>,<b>") +
+                            "</b>",
+                            Player.BCGS.commandsDelay,
+                        );
+                    else {
+                        window.ChatRoomSendLocal(
+                            "<b>" +
+                            matches.join("</b>,<b>") +
+                            "</b>",
+                            Player.BCGS.commandsDelay,
+                        );
+                    }
                 }
 
                 if (matches.length < 1) {
