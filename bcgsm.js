@@ -18,7 +18,7 @@ async function runBCGSM() {
 
     prepareSettings();
 }
-const subcommands = ["enable", "disable", "status", "volume", "categories"];
+const subcommands = ["enable", "disable", "status", "volume", "categories", "[category]"];
 const subcommands_help = [
     {
         command:"enable",
@@ -39,7 +39,15 @@ const subcommands_help = [
     },
     {
         command:"categories",
-        help_text:"<b>/gagsound categories</b>: Prints the sound categories used by the mod"
+        help_text:"<b>/gagsound categories</b>: Shows the sound categories and the probability of each to play - " +
+            "<i> Example: if \"struggle\" is 70%, there is a 70% for a struggle sound to play when using a struggle action or escaping a restraint"
+    },
+    {
+        command: "[category]",
+        help_text: "<b>/gagsound [category]</b>: Shows the probability for sounds of the category specified to play - " +
+            "<i> Example: /gagsound giggle </i>,<br />" +
+                    "<b>/gagsound [category] [0-100]</b>: Changes the probability for sounds of the category specified to play - " +
+                    "<i> Example: /gagsound giggle 75"
     }
 
 ]
@@ -414,6 +422,7 @@ CommandCombine([
             commandHandlerStatus(args.split(" "));
             commandHandlerVolume(args.split(" "));
             commandHandlerCategories(args.split(" "));
+            commandHandlerProbabilities(args.split(" "));
             bcgsSettingsSave();
         },
     },
@@ -421,6 +430,7 @@ CommandCombine([
 
 function commandHandlerHelp(args){
     if(args[0] == ""){
+        let matches_help = [];
         for (let sub of subcommands_help) {
             matches_help.push(sub.help_text);
 
@@ -466,9 +476,9 @@ function commandHandlerVolume(args){
     cmd = args[0];
     if(cmd == "volume"){
         if(args.length == 1)
-            window.ChatRoomSendLocal("Volume: <b>" + Number(Player.BCGS.volume*100) + "</b>", Player.BCGS.commandsDelay);
+            window.ChatRoomSendLocal("Volume: <b>" + parseInt(Player.BCGS.volume*100) + "</b>", Player.BCGS.commandsDelay);
         else {
-            var volume = Number(args[1]);
+            var volume = parseInt(args[1]);
             if(volume >= 0 && volume <= 100)
                 Player.BCGS.volume = volume/100.0;
             else
@@ -483,7 +493,7 @@ function commandHandlerCategories(args){
     if(cmd == "categories"){
         let categories = []
         for(key in Player.BCGS.category_probability){
-            categories.push("<b>" + key + "</b>: " + Number(Player.BCGS.category_probability[key] * 100) + "%");
+            categories.push("<b>" + key + "</b>: " + parseInt(Player.BCGS.category_probability[key] * 100) + "%");
         }
         window.ChatRoomSendLocal(
             categories.join("<br />"),
@@ -491,6 +501,31 @@ function commandHandlerCategories(args){
         );
         
     }
+}
+
+function commandHandlerProbabilities(args){
+    category = args[0];
+    let categories = getCategories();
+    if(categories.includes(cmd)){
+        if(args.length == 1)
+            window.ChatRoomSendLocal("<b>" + category + "</b>: " + Player.BCGS.category_probability[category]);
+        else {
+            probability = parseInt(args[1]);
+            
+            if(probability >= 0 && probability <= 100)
+                Player.BCGS.category_probability[category] = probability/100.0;
+            else
+                window.ChatRoomSendLocal("Probability needs to be a number between 0 and 100", Player.BCGS.commandsDelay);
+        }
+    }
+}
+
+function getCategories(){
+    let categories = []
+    for(key in Player.BCGS.category_probability){
+        categories.push(key);
+    }
+    return categories;
 }
 
 async function prepareSettings(){

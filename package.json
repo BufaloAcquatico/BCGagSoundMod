@@ -1,0 +1,25 @@
+{
+  "name": "bcgagsoundmod",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bcgsmLoader.user.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BufaloAcquatico/BCGagSoundMod.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BufaloAcquatico/BCGagSoundMod/issues"
+  },
+  "homepage": "https://github.com/BufaloAcquatico/BCGagSoundMod#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@eslint/json": "^0.14.0",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0"
+  }
+}
