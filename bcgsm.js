@@ -34,12 +34,12 @@ const subcommands_help = [
     },
     {
         command:"volume",
-        help_text:"<b>/gagsound volume</b>: Displays the current volume<br />"+
+        help_text:"<b>/gagsound volume</b>: Displays the current volume,<br />"+
         "<b>/gagsound volume [0-100]</b>: Changes the volume from 0% to 100%<i> - Example: /gagsound volume 50</i>"
     },
     {
         command:"categories",
-        help_test:"<b>/gagsound categories</b>: Prints the sound categories used by the mod"
+        help_text:"<b>/gagsound categories</b>: Prints the sound categories used by the mod"
     }
 
 ]
@@ -420,7 +420,7 @@ CommandCombine([
 ]);
 
 function commandHandlerHelp(args){
-    if(args.length == 0){
+    if(args[0] == ""){
         for (let sub of subcommands_help) {
             matches_help.push(sub.help_text);
 
