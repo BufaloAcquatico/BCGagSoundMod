@@ -40,14 +40,14 @@ const subcommands_help = [
     {
         command:"categories",
         help_text:"<b>/gagsound categories</b>: Shows the sound categories and the probability of each to play - " +
-            "<i> Example: if \"struggle\" is 70%, there is a 70% for a struggle sound to play when using a struggle action or escaping a restraint"
+            "<i> Example: if \"struggle\" is 70%, there is a 70% for a struggle sound to play when using a struggle action or escaping a restraint</i>"
     },
     {
         command: "[category]",
         help_text: "<b>/gagsound [category]</b>: Shows the probability for sounds of the category specified to play - " +
             "<i> Example: /gagsound giggle </i>,<br />" +
                     "<b>/gagsound [category] [0-100]</b>: Changes the probability for sounds of the category specified to play - " +
-                    "<i> Example: /gagsound giggle 75"
+                    "<i> Example: /gagsound giggle 75 </i>"
     }
 
 ]
