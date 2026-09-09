@@ -483,7 +483,7 @@ function commandHandlerCategories(args){
     if(cmd == "categories"){
         let categories = []
         for(key in Player.BCGS.category_probability){
-            categories.push("<b>" + key + "</b>: " + Player.BCGS.category_probability[key]);
+            categories.push("<b>" + key + "</b>: " + Number(Player.BCGS.category_probability[key] * 100) + "%");
         }
         window.ChatRoomSendLocal(
             categories.join("<br />"),
