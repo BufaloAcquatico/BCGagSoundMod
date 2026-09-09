@@ -404,12 +404,12 @@ CommandCombine([
                     if (common_prefix.length > words[0].length)
                         window.ElementValue("InputChat", "/gagsound " + common_prefix);
                     if(matches_help.length > 0)
-                        window.ChatRoomSendLocal(
-                            "<b>" +
-                            matches_help.join("</b>,<b>") +
-                            "</b>",
-                            Player.BCGS.commandsDelay,
-                        );
+                    window.ChatRoomSendLocal(
+                        "<b>" +
+                        matches_help.join("</b>,<b>") +
+                        "</b>",
+                        Player.BCGS.commandsDelay,
+                    );
                     else {
                         window.ChatRoomSendLocal(
                             "<b>" +
@@ -447,14 +447,11 @@ function commandHandlerHelp(args){
         let matches_help = [];
         for (let sub of subcommands_help) {
             matches_help.push(sub.help_text);
-
-            window.ChatRoomSendLocal(
-                matches_help.join(",<br />"),
-                Player.BCGS.commandsDelay
-            );
         }
-    } else {
-        console.log(args);
+        window.ChatRoomSendLocal(
+            matches_help.join(",<br />"),
+            Player.BCGS.commandsDelay
+        );
     }
 }
 
